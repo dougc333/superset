@@ -39,7 +39,11 @@ export type BigNumberTotalFormData = QueryFormData & {
   yAxisFormat?: string;
   forceTimestampFormatting?: boolean;
 };
-
+export type SmallNumberTotalFormData = QueryFormData & {
+  metric?: QueryFormMetric;
+  yAxisFormat?: string;
+  forceTimestampFormatting?: boolean;
+};
 export type BigNumberWithTrendlineFormData = BigNumberTotalFormData & {
   colorPicker: {
     r: number;
@@ -55,6 +59,12 @@ export interface BigNumberTotalChartDataResponseResult
 }
 
 export type BigNumberTotalChartProps =
+  BaseChartProps<BigNumberTotalFormData> & {
+    formData: BigNumberTotalFormData;
+    queriesData: BigNumberTotalChartDataResponseResult[];
+  };
+
+export type SmallNumberTotalChartProps =
   BaseChartProps<BigNumberTotalFormData> & {
     formData: BigNumberTotalFormData;
     queriesData: BigNumberTotalChartDataResponseResult[];
