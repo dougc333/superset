@@ -70,7 +70,7 @@ function createAxisTitleControl(axis: 'x' | 'y'): ControlSetRow[] {
           type: 'TextControl',
           label: t('Axis Title'),
           renderTrigger: true,
-          default: '',
+          default: 'xxxxx',
           description: t('Changing this control takes effect instantly'),
           visibility: ({ controls }: ControlPanelsContainerProps) =>
             isXAxis ? isVertical(controls) : isHorizontal(controls),
@@ -101,7 +101,7 @@ function createAxisTitleControl(axis: 'x' | 'y'): ControlSetRow[] {
           type: 'TextControl',
           label: t('Axis Title'),
           renderTrigger: true,
-          default: '',
+          default: 'yyyyy',
           description: t('Changing this control takes effect instantly'),
           visibility: ({ controls }: ControlPanelsContainerProps) =>
             isXAxis ? isHorizontal(controls) : isVertical(controls),

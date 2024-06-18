@@ -23,6 +23,7 @@ class StandardizedControlsManager {
   controls: StandardizedControls;
 
   constructor() {
+    console.log(`############ ctor StandardizedControlsManager`);
     this.controls = {
       metrics: [],
       columns: [],
@@ -31,6 +32,7 @@ class StandardizedControlsManager {
 
   setStandardizedControls(formData: QueryFormData) {
     if (isStandardizedFormData(formData)) {
+      console.log(`############formData:$(formData.)`);
       const { controls } = formData.standardizedFormData;
       this.controls = {
         metrics: controls.metrics,
