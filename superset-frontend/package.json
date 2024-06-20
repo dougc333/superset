@@ -110,6 +110,7 @@
     "@superset-ui/plugin-chart-pivot-table": "file:./plugins/plugin-chart-pivot-table",
     "@superset-ui/plugin-chart-table": "file:./plugins/plugin-chart-table",
     "@superset-ui/plugin-chart-word-cloud": "file:./plugins/plugin-chart-word-cloud",
+    "@superset-ui/plugin-chart-word2": "file:./plugins/plugin-chart-word2",
     "@superset-ui/switchboard": "file:./packages/superset-ui-switchboard",
     "@types/d3-format": "^3.0.1",
     "@types/d3-time-format": "^3.0.1",
@@ -361,6 +362,9 @@
     "d3-color": "^3.1.0",
     "yosay": {
       "ansi-regex": "^4.1.1"
+    },
+    "babel-plugin-lodash": {
+      "@babel/types": "~7.20.0"
     }
   },
   "readme": "ERROR: No README data found!",
