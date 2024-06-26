@@ -35,7 +35,7 @@ superset:
                     --firstname "Admin I."\
                     --lastname Strator \
                     --email admin@superset.io \
-                    --password general
+                    --password admin
 
 	# Initialize the database
 	superset db upgrade
@@ -44,7 +44,7 @@ superset:
 	superset init
 
 	# Load some data to play with
-	superset load-examples
+	# superset load-examples
 
 	# Install node packages
 	cd superset-frontend; npm ci
