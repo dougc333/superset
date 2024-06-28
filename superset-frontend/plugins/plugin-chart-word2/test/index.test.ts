@@ -17,13 +17,13 @@
  * under the License.
  */
 
-import { WordCloudChartPlugin2, LegacyWordCloudChartPlugin } from '../src';
+import { WordCloudChartPlugin, LegacyWordCloudChartPlugin } from '../src';
 
 describe('plugin-chart-word-cloud', () => {
-  it('exports WordCloudChartPlugin2', () => {
-    expect(WordCloudChartPlugin2).toBeDefined();
+  it('exports WordCloudChartPlugin', () => {
+    expect(WordCloudChartPlugin).toBeDefined();
   });
-  it('exports LegacyWordCloudChartPlugin2', () => {
+  it('exports LegacyWordCloudChartPlugin', () => {
     expect(LegacyWordCloudChartPlugin).toBeDefined();
   });
 });

@@ -51,10 +51,10 @@ class ImportExamplesCommand(ImportModelsCommand):
     dao = BaseDAO
     model_name = "model"
     schemas: dict[str, Schema] = {
-      #  "charts/": ImportV1ChartSchema(),
-      #   "dashboards/": ImportV1DashboardSchema(),
+        "charts/": ImportV1ChartSchema(),
+        "dashboards/": ImportV1DashboardSchema(),
         "datasets/": ImportV1DatasetSchema(),
-      #  "databases/": ImportV1DatabaseSchema(),
+        "databases/": ImportV1DatabaseSchema(),
     }
     import_error = CommandException
 
@@ -67,10 +67,6 @@ class ImportExamplesCommand(ImportModelsCommand):
 
         # rollback to prevent partial imports
         try:
-            #print("LLLLLLLL self.import:",self._configs)
-            #print("LLLLLLLL self.overwrite:",self.overwrite)
-            #print("LLLLLLLL self.force_data:",self.force_data)
-            
             self._import(
                 self._configs,
                 self.overwrite,
@@ -100,7 +96,6 @@ class ImportExamplesCommand(ImportModelsCommand):
         # import databases
         database_ids: dict[str, int] = {}
         for file_name, config in configs.items():
-            print("KKKKKK database file_name:",file_name)
             if file_name.startswith("databases/"):
                 database = import_database(
                     config,
@@ -117,7 +112,6 @@ class ImportExamplesCommand(ImportModelsCommand):
         dataset_info: dict[str, dict[str, Any]] = {}
         for file_name, config in configs.items():
             if file_name.startswith("datasets/"):
-                print("KKKKKK file_name datasets:",file_name)
                 # find the ID of the corresponding database
                 if config["database_uuid"] not in database_ids:
                     if examples_db is None:
@@ -161,7 +155,6 @@ class ImportExamplesCommand(ImportModelsCommand):
                 file_name.startswith("charts/")
                 and config["dataset_uuid"] in dataset_info
             ):
-                print("KKKKKK charts file_name:",file_name)
                 # update datasource id, type, and name
                 config.update(dataset_info[config["dataset_uuid"]])
                 chart = import_chart(
@@ -184,7 +177,7 @@ class ImportExamplesCommand(ImportModelsCommand):
                     config = update_id_refs(config, chart_ids, dataset_info)
                 except KeyError:
                     continue
-                print("KKKKKK dashboards file_name:",file_name)
+
                 dashboard = import_dashboard(
                     config,
                     overwrite=overwrite,
@@ -202,5 +195,4 @@ class ImportExamplesCommand(ImportModelsCommand):
             {"dashboard_id": dashboard_id, "slice_id": chart_id}
             for (dashboard_id, chart_id) in dashboard_chart_ids
         ]
-        print("KKKKKK values:",values)
         db.session.execute(dashboard_slices.insert(), values)

@@ -49,9 +49,6 @@ def load_contents(load_test_data: bool = False) -> dict[str, Any]:
     queue = [root / str(resource_name) for resource_name in resource_names]
 
     contents: dict[Path, str] = {}
-    print("LLLLL contents:",contents)
-    print("LLLLL queue:",queue)
-    
     while queue:
         path_name = queue.pop()
         test_re = re.compile(r"\.test\.|metadata\.yaml$")
