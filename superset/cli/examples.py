@@ -40,12 +40,14 @@ def load_examples_run(
     import superset.examples.data_loading as examples
 
     examples.load_css_templates()
-
+    #import pdb
     if load_test_data:
-        print("Loading energy related dataset")
+        #pdb.set_trace()
         examples.load_energy(only_metadata, force)
 
     print("Loading [World Bank's Health Nutrition and Population Stats]")
+    #import pdb
+    #pdb.set_trace()
     examples.load_world_bank_health_n_pop(only_metadata, force)
 
     print("Loading [Birth names]")

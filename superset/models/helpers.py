@@ -267,6 +267,16 @@ class ImportExportMixin:
             | set(parent_refs.keys())
             | {"uuid"}
         )
+        print("$$$$$$$") #cls  p dir(cls)
+        print("$$$$$$$") #dict_rep 
+        # f = open("foo.txt","a")
+        # f.write(dict_rep['table_name'])
+        # f.flush()
+        # f.close
+        #logger.info("$$$$$$$$$$ table_name",dict_rep["table_name"])
+        # if (dict_rep['table_name']=='hierarchical_dataset'):
+        #   import pdb
+        #   pdb.set_trace()
         new_children = {c: dict_rep[c] for c in cls.export_children if c in dict_rep}
         unique_constraints = cls._unique_constraints()
 
@@ -344,11 +354,14 @@ class ImportExportMixin:
                 )
                 added = []
                 for c_obj in new_children.get(child, []):
+                    print("IIIIII")
+                    logger.info(f"IIIIII type(cobj):{dict_rep['table_name']}")
                     added.append(
                         child_class.import_from_dict(
                             dict_rep=c_obj, parent=obj, sync=sync
                         )
                     )
+                    logger.info("JJJJJJ added:")
                 # If children should get synced, delete the ones that did not
                 # get updated.
                 if child in sync and not is_new_obj:

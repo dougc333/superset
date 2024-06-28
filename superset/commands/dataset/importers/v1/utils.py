@@ -150,6 +150,9 @@ def import_dataset(
     # import recursively to include columns and metrics
     try:
         dataset = SqlaTable.import_from_dict(config, recursive=True, sync=sync)
+        # import pdb
+        # pdb.set_trace()
+        #public.hierarchiacal_dataset
     except MultipleResultsFound:
         # Finding multiple results when importing a dataset only happens because initially
         # datasets were imported without schemas (eg, `examples.NULL.users`), and later
@@ -168,6 +171,8 @@ def import_dataset(
         table_exists = dataset.database.has_table(
             Table(dataset.table_name, dataset.schema),
         )
+        # import pdb
+        # pdb.set_trace()
     except Exception:  # pylint: disable=broad-except
         # MySQL doesn't play nice with GSheets table names
         logger.warning(

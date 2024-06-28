@@ -32,7 +32,6 @@ import RoseChartPlugin from '@superset-ui/legacy-plugin-chart-rose';
 import SankeyChartPlugin from '@superset-ui/legacy-plugin-chart-sankey';
 import TableChartPlugin from '@superset-ui/plugin-chart-table';
 import { WordCloudChartPlugin } from '@superset-ui/plugin-chart-word-cloud';
-import { WordCloudChartPlugin2 } from '@superset-ui/plugin-chart-word2';
 import WorldMapChartPlugin from '@superset-ui/legacy-plugin-chart-world-map';
 import {
   AreaChartPlugin,
@@ -136,7 +135,6 @@ export default class MainPreset extends Preset {
         new TimePivotChartPlugin().configure({ key: 'time_pivot' }),
         new TimeTableChartPlugin().configure({ key: 'time_table' }),
         new WordCloudChartPlugin().configure({ key: 'word_cloud' }),
-        new WordCloudChartPlugin2().configure({ key: 'word_cloud2' }),
         new WorldMapChartPlugin().configure({ key: 'world_map' }),
         new EchartsAreaChartPlugin().configure({
           key: 'echarts_area',

@@ -186,7 +186,7 @@ class ImportV1ColumnSchema(Schema):
         """
         if isinstance(data.get("extra"), str):
             data["extra"] = json.loads(data["extra"])
-
+           
         return data
 
     column_name = fields.String(required=True)
