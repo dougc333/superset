@@ -26,7 +26,7 @@ from typing import Any, cast, TypeVar, Union
 
 from superset.exceptions import CreateKeyValueDistributedLockFailedException
 from superset.key_value.exceptions import KeyValueCreateFailedError
-from superset.key_value.types import KeyValueResource, PickleKeyValueCodec
+from superset.key_value.types import JsonKeyValueCodec, KeyValueResource
 from superset.utils import json
 
 LOCK_EXPIRATION = timedelta(seconds=30)
@@ -53,6 +53,10 @@ def serialize(params: dict[str, Any]) -> str:
     return json.dumps(params)
 
 
+def get_key(namespace: str, **kwargs: Any) -> uuid.UUID:
+    return uuid.uuid5(uuid.uuid5(uuid.NAMESPACE_DNS, namespace), serialize(kwargs))
+
+
 @contextmanager
 def KeyValueDistributedLock(  # pylint: disable=invalid-name
     namespace: str,
@@ -67,7 +71,6 @@ def KeyValueDistributedLock(  # pylint: disable=invalid-name
     store.
 
     :param namespace: The namespace for which the lock is to be acquired.
-    :type namespace: str
     :param kwargs: Additional keyword arguments.
     :yields: A unique identifier (UUID) for the acquired lock (the KV key).
     :raises CreateKeyValueDistributedLockFailedException: If the lock is taken.
@@ -77,13 +80,13 @@ def KeyValueDistributedLock(  # pylint: disable=invalid-name
     from superset.commands.key_value.delete import DeleteKeyValueCommand
     from superset.commands.key_value.delete_expired import DeleteExpiredKeyValueCommand
 
-    key = uuid.uuid5(uuid.uuid5(uuid.NAMESPACE_DNS, namespace), serialize(kwargs))
+    key = get_key(namespace, **kwargs)
     logger.debug("Acquiring lock on namespace %s for key %s", namespace, key)
     try:
         DeleteExpiredKeyValueCommand(resource=KeyValueResource.LOCK).run()
         CreateKeyValueCommand(
             resource=KeyValueResource.LOCK,
-            codec=PickleKeyValueCodec(),
+            codec=JsonKeyValueCodec(),
             key=key,
             value=True,
             expires_on=datetime.now() + LOCK_EXPIRATION,
